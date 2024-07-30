@@ -44,6 +44,43 @@ const plugins = [
 		},
 	},
 	{
+		resolve: `medusa-plugin-algolia`,
+		options: {
+			applicationId: process.env.ALGOLIA_APP_ID,
+			adminApiKey: process.env.ALGOLIA_ADMIN_API_KEY,
+			settings: {
+				indexName: {
+					indexSettings: {
+						// searchableAttributes,
+						attributesToRetrieve: [
+							"id",
+							"title",
+							"description",
+							"handle",
+							"thumbnail",
+							"variants",
+							"variant_sku",
+							"options",
+							"collection_title",
+							"collection_handle",
+							"images",
+						],
+					},
+					transformer: (product) => ({
+						objectID: product.id,
+						// other attributes...
+					}),
+				},
+			},
+		},
+	},
+	// {
+	// 	resolve: "medusa-plugin-category-images",
+	// 	options: {
+	// 		enableUI: true,
+	// 	},
+	// },
+	{
 		resolve: "@medusajs/admin",
 		/** @type {import('@medusajs/admin').PluginOptions} */
 		options: {
@@ -56,18 +93,18 @@ const plugins = [
 ];
 
 const modules = {
-	// eventBus: {
-	// 	resolve: "@medusajs/event-bus-redis",
-	// 	options: {
-	// 		redisUrl: REDIS_URL,
-	// 	},
-	// },
-	// cacheService: {
-	// 	resolve: "@medusajs/cache-redis",
-	// 	options: {
-	// 		redisUrl: REDIS_URL,
-	// 	},
-	// },
+	eventBus: {
+		resolve: "@medusajs/event-bus-redis",
+		options: {
+			redisUrl: REDIS_URL,
+		},
+	},
+	cacheService: {
+		resolve: "@medusajs/cache-redis",
+		options: {
+			redisUrl: REDIS_URL,
+		},
+	},
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
