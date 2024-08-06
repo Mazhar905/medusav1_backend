@@ -35,11 +35,10 @@ const plugins = [
 	`medusa-fulfillment-manual`,
 	`medusa-payment-manual`,
 	{
-		    resolve: "@medusajs/admin",
-		    /** @type {import('@medusajs/admin').PluginOptions} */
-		    options: {
-			        },
-			          },
+		resolve: "@medusajs/admin",
+		/** @type {import('@medusajs/admin').PluginOptions} */
+		options: {},
+	},
 	{
 		resolve: `medusa-plugin-wishlist`,
 	},
@@ -90,9 +89,19 @@ const plugins = [
 		resolve: "@medusajs/admin",
 		/** @type {import('@medusajs/admin').PluginOptions} */
 		options: {
+			serve: true,
 			autoRebuild: true,
+			backend: "https://admin.egalaspot.com",
+			path: "/app",
+			outDir: "build",
 			develop: {
-				open: process.env.OPEN_BROWSER !== "false",
+				open: true,
+				port: 7001,
+				host: "example.com",
+				logLevel: "error",
+				stats: "normal",
+				allowedHosts: "auto",
+				webSocketURL: undefined,
 			},
 		},
 	},
